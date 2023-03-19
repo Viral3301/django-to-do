@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load main_tags %}
+
+
+{% block content %}
+<div class="task-detail-object">
+    <h2 class="task-detail-title">{{ post.task_title }}</h2>
+    <p class="task-detail-body">{{ post.task_body }}</p>
+    {% if post.deadline|compare_dates >= 0 %}
+       <div class="task-detail-deadline-object"> <p class="task-detail-deadline">Дедлайн : {{ post.deadline }}</p><p class="task-detail-days-until-deadline"> Дней осталось : {{ post.deadline|compare_dates }}</p></div>
+    {% elif post.deadline == None %}
+        <p class="task-detail-deadline-unset">Дедлайн не задан</p>
+    {% else %}
+        <div class="task-detail-deadline-object"> <p class="task-detail-deadline">Дедлайн : {{ post.deadline }}</p><p class="task-detail-days-until-deadline-failed"> Срок выполнения истек</p></div>
+    {% endif %}
+    <p class="task-detail-current-date">Дата создания: {{ post.creation_date }} <a href="{% url 'delete' post.pk %}" class="delete-url"><img src="/static/main/delete-icon.svg" alt=""></a> <a class="edit-url" href="{% url 'edit' post.pk %}"><img src="/static/main/edit-icon.svg" alt=""></a></p>
+</div>
+
+{% endblock content %}

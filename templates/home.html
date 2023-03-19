@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load main_tags %}
+
+    {% block content %}
+        <div class="task-container">
+            <ul class="task-list">
+                {% for post in object_list %}
+                    {% if post.deadline|compare_dates >= 3 or post.deadline == None %}
+                        <li class="task-object">
+                            <a class="task-title-url" href="{% url 'task_detail' post.pk %}">{{ post.task_title }}</a>
+                        </li>
+                    {% else %}
+                        <li class="task-object-object-expires">
+                            <a class="task-title-url" href="{% url 'task_detail' post.pk %}">{{ post.task_title }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    {% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="task-detail-object">
+    <form action="" method="post">{% csrf_token %}
+        <p class="task-detail-title">Вы уверены что хотите удалить "{{post.task_title}}"</p>
+        <input class="delete-confirm" style="margin: 15px 45px 0 60px;" type="submit" value="Подтвердить">
+    </form>
+    
+</div>
+
+{% endblock content %}
